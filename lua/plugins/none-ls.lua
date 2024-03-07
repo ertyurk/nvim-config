@@ -16,19 +16,8 @@ return {
                         vim.lsp.buf.format({ bufnr = bufnr })
                     end,
                 })
-                vim.api.nvim_create_autocmd(
-                    { "BufWritePre" },
-                    { pattern = { "*.templ" }, callback = vim.lsp.buf.format }
-                )
             end
         end
-        -- Replace with the actual TEMPL formatter command
-        local templ_formatter = null_ls.builtins.formatting.prettier.with({
-            filetypes = { "templ" },
-            command = { "templ", "lsp" },
-            args = { "--stdin" },
-            to_stdin = true,
-        })
         null_ls.setup({
             sources = {
                 null_ls.builtins.formatting.stylua,
@@ -37,7 +26,6 @@ return {
                 null_ls.builtins.formatting.gofumpt,
                 null_ls.builtins.formatting.goimports_reviser,
                 null_ls.builtins.formatting.golines,
-                templ_formatter,
             },
             on_attach = on_attach,
         })
