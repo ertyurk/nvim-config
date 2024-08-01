@@ -1,3 +1,13 @@
+## My Needs
+
+4. Navigation within the file
+   1. search a key 2. replace the searched key 3. select all keys that is searched 1. and replace all
+   2. up down left right with X amount of chars/lines
+   3. go to implementation of the cursored key
+   4. go to references of the cursored key
+   5. search and replace all with one by one approval of the change in whole project
+   6. Automation within the file to replace all
+
 ## MOTIONS:
 
 <h> Left
@@ -76,3 +86,48 @@ My Customs
 ["<C-Space>"] = cmp.mapping.complete(),
 ["<C-e>"] = cmp.mapping.abort(),
 ["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+My Custom Copier/yanker
+<leader>ya followed by Enter: Yanks the whole file.
+<leader>ya followed by a number and Enter: Yanks that many lines.
+<leader>ya followed by any non-numeric input and Enter: Yanks the whole file.
+
+to be cleaned:
+File Navigation: - `<C-p>`: Open Telescope file finder (find_files) - `<leader>fg`: Open Telescope live grep for searching file contents - `<leader>fb`: Open Telescope file browser
+
+- File Browser Actions (when in Telescope file browser):
+  - Insert mode:
+    - `<A-c>`: Create a new file or folder
+    - `<S-CR>`: Create a new file or folder from the prompt
+  - Normal mode:
+    - `c`: Create a new file or folder
+    - `r`: Rename the selected file or folder
+- Copilot:
+  - Copilot is installed, but no custom keybindings are set. It typically uses its default shortcuts:
+    - `<Tab>`: Accept suggestion (in insert mode)
+    - `<C-]>`: Dismiss current suggestion
+    - `<M-]>`: Cycle to next suggestion
+    - `<M-[>`: Cycle to previous suggestion
+- Language Server Protocol (LSP):
+  - LSP is configured, but no custom keybindings are set. Typical default LSP shortcuts include:
+    - `gd`: Go to definition
+    - `gr`: Go to references
+    - `gi`: Go to implementation
+    - `K`: Show hover information
+    - `<C-k>`: Show signature help
+    - `<leader>rn`: Rename symbol
+    - `<leader>ca`: Code action
+    - `<leader>gf`: Format buffer
+    - `<leader>gr`: Find references
+    - `<leader>gd`: Go to definition
+- Completion (nvim-cmp):
+  - The completion plugin is installed, but no custom keybindings are set. Typical default behaviors include:
+    - `<C-n>` or `<Down>`: Navigate to the next item in the completion menu
+    - `<C-p>` or `<Up>`: Navigate to the previous item in the completion menu
+    - `<CR>` or `<Tab>`: Confirm selection
+  - Completion (nvim-cmp) Shortcuts:
+  - <C-b>: Scroll docs backward
+  - <C-f>: Scroll docs forward
+  - <C-Space>: Open completion menu
+  - <C-e>: Close completion menu
+  - <CR> (Enter): Confirm selection
