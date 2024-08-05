@@ -87,12 +87,21 @@ My Customs
 ["<C-e>"] = cmp.mapping.abort(),
 ["<CR>"] = cmp.mapping.confirm({ select = true }),
 
-My Custom Copier/yanker
+## Comment Line
+
+gcc: Toggle line comment
+gbc: Toggle block comment
+gc: Toggle line comment (in visual mode)
+gb: Toggle block comment (in visual mode)
+
+## My Custom Copier/yanker
+
 <leader>ya followed by Enter: Yanks the whole file.
 <leader>ya followed by a number and Enter: Yanks that many lines.
 <leader>ya followed by any non-numeric input and Enter: Yanks the whole file.
 
-to be cleaned:
+# to be cleaned:
+
 File Navigation: - `<C-p>`: Open Telescope file finder (find_files) - `<leader>fg`: Open Telescope live grep for searching file contents - `<leader>fb`: Open Telescope file browser
 
 - File Browser Actions (when in Telescope file browser):
