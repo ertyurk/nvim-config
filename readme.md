@@ -1,150 +1,145 @@
-## My Needs
+# My Vim Setup
 
-1. **Navigation within the File:**
-   - Search for a key and replace it.
-   - Select and replace all occurrences of a searched key.
-   - Move up, down, left, right by X amount of chars/lines.
-   - Go to the implementation of the selected key.
-   - Go to references of the selected key.
-   - Search and replace all with one-by-one approval throughout the whole project.
-   - Automate within the file to replace all instances.
+### My Needs
 
-## Motions
+1. **File Navigation:**
 
-- **Basic Motions:**
-  - `<h>`: Left
-  - `<j>`: Down
-  - `<k>`: Up
-  - `<l>`: Right
-  - `<5j>`: Move 5 lines down
-  - `<$>`: Jump to the end of the line
-  - `<0>`: Jump to the beginning of the line
-  - `<^>`: Jump to the first non-empty character
+   - Search and replace specific keys.
+   - Move by characters/lines.
+   - Jump to key implementations and references.
+   - Search and replace across the project with approval.
 
-- **Character Navigation:**
-  - `<f + {char}>`: Jump to the next occurrence of `{char}` in the line
-  - `<F + {char}>`: Jump to the previous occurrence of `{char}` in the line
+2. **Motions:**
 
-- **Sentence/Paragraph Navigation:**
-  - `<(>`: One sentence up
-  - `<)>`: One sentence down
-  - `<{>`: One paragraph up
-  - `<}>`: One paragraph down
+   - `<ZZ>`: Save and exit
+   - `<ZQ>`: Exit without saving
+   - `<vib>`: Select inside parentheses
+   - `<viB>`: Select inside curly braces
+   - `<vi]>`: Select inside square brackets
+   - `<vi">`: Select inside double quotes
+   - `<cib>`: Change inside parentheses
+   - `<ciB>`: Change inside curly braces
+   - `<ctrl + v>`: Visual block mode for multi-line edits
+   - `<shift + i>`: Insert at beginning, `<shift + a>`: Append at end
+   - `<%>`: Jump to matching parentheses
+   - `<J>`: Join lines
+   - `<gJ>`: Join lines without spaces
 
-- **Word Navigation:**
-  - `<e>`: Jump to the end of the word
-  - `<w>`: Move forward word by word
-  - `<b>`: Move backward word by word
-  - `<W>`: Move forward by whitespace-separated words
-  - `<B>`: Move backward by whitespace-separated words
+3. **Replace Key:**
 
-- **Insert Mode:**
-  - `<o>`: Insert after the current line
-  - `<O>`: Insert before the current line
-  - `<i>`: Insert before the cursor
-  - `<a>`: Insert after the cursor
+   - Use `%s/old_key/new_key/gc` for search and replace:
+     - `%`: Entire file
+     - `s`: Substitute
+     - `g`: Replace all occurrences in each line
+     - `c`: Confirm each replacement
 
-- **Replace/Delete:**
-  - `<C>`: Replace the current word
-  - `<S>`: Replace the current line
-  - `<s>`: Replace the current character
-  - `<yy>`: Copy the whole line
-  - `<p>`: Paste
-  - `<u>`: Undo
-  - `<Ctrl + r>`: Redo
+4. **Basic Motions:**
 
-- **Text Operations:**
-  - `<y+i+{"( or {"}>`: Copy inside parentheses or curly braces without including them
-  - `<y+a+{"( or {"}>`: Copy inside parentheses or curly braces including them
-  - `<d + w>`: Delete the word
-  - `<d + s>`: Delete the sentence
-  - `<d + p>`: Delete the paragraph
-  - `<d + t + {char}>`: Delete until a specific character
-  - `<.>`: Repeat the last command
+   - `<h/j/k/l>`: Left/Down/Up/Right
+   - `<5j>`: Move 5 lines down
+   - `<$>`: End of line, `<0>`: Start of line
+   - `<^>`: First non-empty character
 
-- **Search:**
-  - `<n>`: Next occurrence of the highlighted keyword
-  - `<N>`: Previous occurrence of the highlighted keyword
-  - `<*>`: Search forward for the word under the cursor
-  - `<#>`: Search backward for the word under the cursor
+5. **Character Navigation:**
 
-- **Bookmarks:**
-  - `<m + {charX}>`: Set a bookmark
-  - `<\` + {charX}>`: Go to the bookmark
-  - `<\` + \`>`: Toggle between the last two positions
-  - `<\` + .>`: Go to the last edit
+   - `<f{char}>`: Forward to `{char}`
+   - `<F{char}>`: Backward to `{char}`
 
-## My Custom Keybindings
+6. **Sentence/Paragraph Navigation:**
 
-- `<C-p>`: Open file finder (builtin.find_files)
-- `<leader>fg`: Open live grep (builtin.live_grep)
-- `K`: Hover information (vim.lsp.buf.hover)
-- `<leader>gd`: Go to definition (vim.lsp.buf.definition)
-- `CTRL+o`: Back from "Go to definition"
-- `<leader>gr`: Go to references (vim.lsp.buf.references)
-- `<leader>ca`: Code action (vim.lsp.buf.code_action)
-- `<C-b>`: Scroll docs backward (nvim-cmp)
-- `<C-f>`: Scroll docs forward (nvim-cmp)
-- `<C-Space>`: Open completion menu (nvim-cmp)
-- `<C-e>`: Close completion menu (nvim-cmp)
-- `<CR>`: Confirm selection (nvim-cmp)
+   - `<(>)`: Up/Down by sentence
+   - `<{>} `: Up/Down by paragraph
 
-## Commenting
+7. **Word Navigation:**
 
-- `gcc`: Toggle line comment
-- `gbc`: Toggle block comment
-- `gc`: Toggle line comment (visual mode)
-- `gb`: Toggle block comment (visual mode)
+   - `<e/w/b>`: End of word/Forward by word/Backward by word
+   - `<W/B>`: Move by whitespace-separated words
 
-## Custom Copier/Yanker
+8. **Insert Mode:**
 
-- `<leader>ya` + Enter: Yank the whole file.
-- `<leader>ya` + number + Enter: Yank that many lines.
-- `<leader>ya` + any non-numeric input + Enter: Yank the whole file.
+   - `<o>`: Insert after current line
+   - `<O>`: Insert before current line
+   - `<i/a>`: Insert before/after cursor
 
-## File Navigation
+9. **Replace/Delete:**
 
-- `<C-p>`: Open file finder (Telescope `find_files`)
-- `<leader>fg`: Open live grep (Telescope `live_grep`)
-- `<leader>fb`: Open file browser (Telescope `file_browser`)
+   - `<C>`: Change to end of line
+   - `<S>`: Replace current line
+   - `<s>`: Replace current character
+   - `<yy/p>`: Copy/Paste line
+   - `<u/Ctrl + r>`: Undo/Redo
 
-### File Browser Actions (Telescope)
+10. **Text Operations:**
 
-- **Insert Mode:**
-  - `<A-c>`: Create a new file/folder
-  - `<S-CR>`: Create a new file/folder from the prompt
-- **Normal Mode:**
-  - `c`: Create a new file/folder
-  - `r`: Rename the selected file/folder
+    - `<yi( or {)>`: Copy inside parentheses/curly braces
+    - `<da{char}>`: Delete until `{char}`
+    - `<.>`: Repeat last command
 
-## Copilot
+11. **Search:**
 
-- **Default Shortcuts:**
-  - `<Tab>`: Accept suggestion (insert mode)
-  - `<C-]>`: Dismiss suggestion
-  - `<M-]>`: Next suggestion
-  - `<M-[>`: Previous suggestion
+    - `<n/N>`: Next/Previous occurrence
+    - `<*>/#>`: Search forward/backward for word under cursor
 
-## Language Server Protocol (LSP)
+12. **Bookmarks:**
+    - `<m{char}>`: Set bookmark
+    - `<\`{char}>`: Go to bookmark
+    - `<\`\`>`: Toggle between last two positions
+
+### Custom Keybindings
+
+- **File Navigation:**
+
+  - `<C-p>`: Open file finder
+  - `<leader>fg>`: Open live grep
+  - `<leader>fb>`: Open file browser
+
+- **Editing:**
+
+  - `K`: Hover information
+  - `<leader>gd>`: Go to definition
+  - `<leader>gr>`: Go to references
+  - `<leader>ca>`: Code action
+  - `<C-b/f>`: Scroll docs backward/forward
+  - `<C-Space>`: Open completion menu
+  - `<CR>`: Confirm selection
+
+- **Commenting:**
+
+  - `gcc`: Toggle line comment
+  - `gbc`: Toggle block comment
+  - `gc`: Comment (visual mode)
+  - `gb`: Block comment (visual mode)
+
+- **Custom Copier/Yanker:**
+  - `<leader>ya + Enter>`: Yank entire file
+  - `<leader>ya + {number}>`: Yank {number} lines
+  - `<leader>ya + {input}>`: Yank entire file
+
+### Language Server Protocol (LSP)
 
 - `gd`: Go to definition
 - `gr`: Go to references
 - `gi`: Go to implementation
 - `K`: Hover information
-- `<C-k>`: Show signature help
-- `<leader>rn`: Rename symbol
-- `<leader>ca`: Code action
-- `<leader>gf`: Format buffer
-- `<leader>gr`: Find references
-- `<leader>gd`: Go to definition
+- `<C-k>`: Signature help
+- `<leader>rn>`: Rename symbol
+- `<leader>ca>`: Code action
+- `<leader>gf>`: Format buffer
+- `<leader>gr>`: Find references
+- `<leader>gd>`: Go to definition
 
-## Completion (nvim-cmp)
+### Completion (nvim-cmp)
 
-- `<C-n>` or `<Down>`: Next item in completion menu
-- `<C-p>` or `<Up>`: Previous item in completion menu
-- `<CR>` or `<Tab>`: Confirm selection
-- `<C-b>`: Scroll docs backward
-- `<C-f>`: Scroll docs forward
+- `<C-n/Down>`: Next item
+- `<C-p/Up>`: Previous item
+- `<CR/Tab>`: Confirm selection
+- `<C-b/f>`: Scroll docs
 - `<C-Space>`: Open completion menu
 - `<C-e>`: Close completion menu
-- `<CR>`: Confirm selection
+
+### Copilot
+
+- `<Tab>`: Accept suggestion
+- `<C-]>`: Dismiss suggestion
+- `<M-]`: Next suggestion
+- `<M-[>`: Previous suggestion
