@@ -1,97 +1,91 @@
-# My Vim Setup
+# Setup
 
-### My Needs
+### Motions
 
-1. **File Navigation:**
+- **Basic Navigation:**
 
-   - Search and replace specific keys.
-   - Move by characters/lines.
-   - Jump to key implementations and references.
-   - Search and replace across the project with approval.
+  - `<h/j/k/l>`: Left/Down/Up/Right
+  - `<5j>`: Move 5 lines down
+  - `<$>`: End of line, `<0>`: Start of line
+  - `<^>`: First non-empty character
+  - `<C-o>`: Back from "Go to definition"
 
-2. **Motions:**
+- **Character Navigation:**
 
-   - `<ZZ>`: Save and exit
-   - `<ZQ>`: Exit without saving
-   - `<vib>`: Select inside parentheses
-   - `<viB>`: Select inside curly braces
-   - `<vi]>`: Select inside square brackets
-   - `<vi">`: Select inside double quotes
-   - `<cib>`: Change inside parentheses
-   - `<ciB>`: Change inside curly braces
-   - `<ctrl + v>`: Visual block mode for multi-line edits
-   - `<shift + i>`: Insert at beginning, `<shift + a>`: Append at end
-   - `<%>`: Jump to matching parentheses
-   - `<J>`: Join lines
-   - `<gJ>`: Join lines without spaces
+  - `<f{char}>`: Forward to `{char}`
+  - `<F{char}>`: Backward to `{char}`
 
-3. **Replace Key:**
+- **Sentence/Paragraph Navigation:**
 
-   - Use `%s/old_key/new_key/gc` for search and replace:
-     - `%`: Entire file
-     - `s`: Substitute
-     - `g`: Replace all occurrences in each line
-     - `c`: Confirm each replacement
+  - `<(>)`: Up/Down by sentence
+  - `<{>} `: Up/Down by paragraph
 
-4. **Basic Motions:**
+- **Word Navigation:**
 
-   - `<h/j/k/l>`: Left/Down/Up/Right
-   - `<5j>`: Move 5 lines down
-   - `<$>`: End of line, `<0>`: Start of line
-   - `<^>`: First non-empty character
+  - `<e/w/b>`: End of word/Forward by word/Backward by word
+  - `<W/B>`: Move by whitespace-separated words
 
-5. **Character Navigation:**
+- **Insert Mode:**
 
-   - `<f{char}>`: Forward to `{char}`
-   - `<F{char}>`: Backward to `{char}`
+  - `<o>`: Insert after current line
+  - `<O>`: Insert before current line
+  - `<i/a>`: Insert before/after cursor
 
-6. **Sentence/Paragraph Navigation:**
+- **Block Operations:**
 
-   - `<(>)`: Up/Down by sentence
-   - `<{>} `: Up/Down by paragraph
+  - `<vib>`: Select inside parentheses
+  - `<viB>`: Select inside curly braces
+  - `<vi]>`: Select inside square brackets
+  - `<vi">`: Select inside double quotes
+  - `<cib>`: Change inside parentheses
+  - `<ciB>`: Change inside curly braces
+  - `<ctrl + v>`: Visual block mode for multi-line edits
+  - `<shift + i>`: Insert at beginning, `<shift + a>`: Append at end
 
-7. **Word Navigation:**
+- **Joining Lines:**
 
-   - `<e/w/b>`: End of word/Forward by word/Backward by word
-   - `<W/B>`: Move by whitespace-separated words
+  - `<J>`: Join lines
+  - `<gJ>`: Join lines without spaces
 
-8. **Insert Mode:**
+- **Replace Key:**
 
-   - `<o>`: Insert after current line
-   - `<O>`: Insert before current line
-   - `<i/a>`: Insert before/after cursor
+  - Use `%s/old_key/new_key/gc` for search and replace:
+    - `%`: Entire file
+    - `s`: Substitute
+    - `g`: Replace all occurrences in each line
+    - `c`: Confirm each replacement
 
-9. **Replace/Delete:**
+- **Search:**
 
-   - `<C>`: Change to end of line
-   - `<S>`: Replace current line
-   - `<s>`: Replace current character
-   - `<yy/p>`: Copy/Paste line
-   - `<u/Ctrl + r>`: Undo/Redo
+  - `<n/N>`: Next/Previous occurrence
+  - `<*>/#>`: Search forward/backward for word under cursor
+  - `gd`: Go to definition of the selected key
+  - `gr`: Go to references of the selected key
+  - `gi`: Go to implementation of the selected key
 
-10. **Text Operations:**
+- **Text Operations:**
 
-    - `<yi( or {)>`: Copy inside parentheses/curly braces
-    - `<da{char}>`: Delete until `{char}`
-    - `<.>`: Repeat last command
+  - `<C>`: Change to end of line
+  - `<S>`: Replace current line
+  - `<s>`: Replace current character
+  - `<yy/p>`: Copy/Paste line
+  - `<u/Ctrl + r>`: Undo/Redo
+  - `<yi( or {)>`: Copy inside parentheses/curly braces
+  - `<da{char}>`: Delete until `{char}`
+  - `<.>`: Repeat last command
 
-11. **Search:**
-
-    - `<n/N>`: Next/Previous occurrence
-    - `<*>/#>`: Search forward/backward for word under cursor
-
-12. **Bookmarks:**
-    - `<m{char}>`: Set bookmark
-    - `<\`{char}>`: Go to bookmark
-    - `<\`\`>`: Toggle between last two positions
+- **Bookmarks:**
+  - `<m{char}>`: Set bookmark
+  - `<\`{char}>`: Go to bookmark
+  - `<\`\`>`: Toggle between last two positions
 
 ### Custom Keybindings
 
 - **File Navigation:**
 
-  - `<C-p>`: Open file finder
-  - `<leader>fg>`: Open live grep
-  - `<leader>fb>`: Open file browser
+  - `<C-p>`: Open file finder (Telescope `find_files`)
+  - `<leader>fg>`: Open live grep (Telescope `live_grep`)
+  - `<leader>fb>`: Open file browser (Telescope `file_browser`)
 
 - **Editing:**
 
