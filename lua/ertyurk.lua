@@ -69,3 +69,10 @@ function yank_lines_dynamic()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>ya", ":lua yank_lines_dynamic()<CR>", { noremap = true, silent = true })
+
+-- Avante
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
+-- Default splitting will cause your main splits to jump when opening an edgebar.
+-- To prevent this, set `splitkeep` to either `screen` or `topline`.
+vim.opt.splitkeep = "screen"

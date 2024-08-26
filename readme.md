@@ -1,128 +1,132 @@
-# Setup
+# Avante for Neovim - Setup Guide
 
-### Motions
+## Motions
 
-- **Basic Navigation:**
+### Basic Navigation
 
-  - `<h/j/k/l>`: Left/Down/Up/Right
-  - `<5j>`: Move 5 lines down
-  - `<$>`: End of line, `<0>`: Start of line
-  - `<^>`: First non-empty character
-  - `<C-o>`: Back from "Go to definition"
+- `<h/j/k/l>`: Move left/down/up/right
+- `<5j>`: Move 5 lines down
+- `<$>`: Move to the end of the line
+- `<0>`: Move to the start of the line
+- `<^>`: Move to the first non-empty character
+- `<C-o>`: Return from "Go to definition"
 
-- **Character Navigation:**
+### Character Navigation
 
-  - `<f{char}>`: Forward to `{char}`
-  - `<F{char}>`: Backward to `{char}`
+- `<f{char}>`: Move forward to `{char}`
+- `<F{char}>`: Move backward to `{char}`
 
-- **Sentence/Paragraph Navigation:**
+### Sentence/Paragraph Navigation
 
-  - `<(>)`: Up/Down by sentence
-  - `<{>} `: Up/Down by paragraph
+- `<(>)`: Move up/down by sentence
+- `<{>} `: Move up/down by paragraph
 
-- **Word Navigation:**
+### Word Navigation
 
-  - `<e/w/b>`: End of word/Forward by word/Backward by word
-  - `<W/B>`: Move by whitespace-separated words
+- `<e/w/b>`: Move to end/forward/backward by word
+- `<W/B>`: Move by whitespace-separated words
 
-- **Insert Mode:**
+### Insert Mode
 
-  - `<o>`: Insert after current line
-  - `<O>`: Insert before current line
-  - `<i/a>`: Insert before/after cursor
+- `<o>`: Insert after the current line
+- `<O>`: Insert before the current line
+- `<i/a>`: Insert before/after the cursor
 
-- **Block Operations:**
+### Block Operations
 
-  - `<vib>`: Select inside parentheses
-  - `<viB>`: Select inside curly braces
-  - `<vi]>`: Select inside square brackets
-  - `<vi">`: Select inside double quotes
-  - `<cib>`: Change inside parentheses
-  - `<ciB>`: Change inside curly braces
-  - `<ctrl + v>`: Visual block mode for multi-line edits
-  - `<shift + i>`: Insert at beginning, `<shift + a>`: Append at end
+- `<vib>`: Select inside parentheses
+- `<viB>`: Select inside curly braces
+- `<vi]>`: Select inside square brackets
+- `<vi">`: Select inside double quotes
+- `<cib>`: Change inside parentheses
+- `<ciB>`: Change inside curly braces
+- `<Ctrl-v>`: Enter visual block mode for multi-line edits
+- `<Shift-i>`: Insert at the beginning of the block
+- `<Shift-a>`: Append at the end of the block
 
-- **Joining Lines:**
+### Joining Lines
 
-  - `<J>`: Join lines
-  - `<gJ>`: Join lines without spaces
+- `<J>`: Join lines with space
+- `<gJ>`: Join lines without space
 
-- **Replace Key:**
+### Replace Key
 
-  - Use `%s/old_key/new_key/gc` for search and replace:
-    - `%`: Entire file
-    - `s`: Substitute
-    - `g`: Replace all occurrences in each line
-    - `c`: Confirm each replacement
+- Use `%s/old_key/new_key/gc` for search and replace:
+  - `%`: Search in the entire file
+  - `s`: Substitute
+  - `g`: Replace all occurrences in each line
+  - `c`: Confirm each replacement
 
-- **Search:**
+### Search
 
-  - `<n/N>`: Next/Previous occurrence
-  - `<*>/#>`: Search forward/backward for word under cursor
-  - `gd`: Go to definition of the selected key
-  - `gr`: Go to references of the selected key
-  - `gi`: Go to implementation of the selected key
+- `<n/N>`: Move to the next/previous occurrence
+- `<*>/#>`: Search forward/backward for the word under the cursor
+- `gd`: Go to definition
+- `gr`: Go to references
+- `gi`: Go to implementation
 
-- **Text Operations:**
+### Text Operations
 
-  - `<C>`: Change to end of line
-  - `<S>`: Replace current line
-  - `<s>`: Replace current character
-  - `<yy/p>`: Copy/Paste line
-  - `<u/Ctrl + r>`: Undo/Redo
-  - `<yi( or {)>`: Copy inside parentheses/curly braces
-  - `<da{char}>`: Delete until `{char}`
-  - `<.>`: Repeat last command
+- `<C>`: Change to the end of the line
+- `<S>`: Replace the current line
+- `<s>`: Replace the current character
+- `<yy/p>`: Copy/Paste line
+- `<u/Ctrl-r>`: Undo/Redo
+- `<yi(/{)>`: Copy inside parentheses/curly braces
+- `<da{char}>`: Delete until `{char}`
+- `<.>`: Repeat the last command
 
-- **Bookmarks:**
-  - `<m{char}>`: Set bookmark
-  - `<\`{char}>`: Go to bookmark
-  - `<\`\`>`: Toggle between last two positions
+### Bookmarks
 
-### Custom Keybindings
+- `<m{char}>`: Set bookmark
+- ``<`{char}>``: Go to bookmark
+- ``<`>` ``: Toggle between the last two positions
 
-- **File Navigation:**
+## Custom Keybindings
 
-  - `<C-p>`: Open file finder (Telescope `find_files`)
-  - `<leader>fg>`: Open live grep (Telescope `live_grep`)
-  - `<leader>fb>`: Open file browser (Telescope `file_browser`)
+### File Navigation
 
-- **Editing:**
+- `<C-p>`: Open file finder (Telescope `find_files`)
+- `<leader>fg>`: Open live grep (Telescope `live_grep`)
+- `<leader>fb>`: Open file browser (Telescope `file_browser`)
 
-  - `K`: Hover information
-  - `<leader>gd>`: Go to definition
-  - `<leader>gr>`: Go to references
-  - `<leader>ca>`: Code action
-  - `<C-b/f>`: Scroll docs backward/forward
-  - `<C-Space>`: Open completion menu
-  - `<CR>`: Confirm selection
+### Editing
 
-- **Commenting:**
+- `K`: Show hover information
+- `<leader>gd>`: Go to definition
+- `<leader>gr>`: Go to references
+- `<leader>ca>`: Trigger code action
+- `<C-b/f>`: Scroll docs backward/forward
+- `<C-Space>`: Open completion menu
+- `<CR>`: Confirm selection
 
-  - `gcc`: Toggle line comment
-  - `gbc`: Toggle block comment
-  - `gc`: Comment (visual mode)
-  - `gb`: Block comment (visual mode)
+### Commenting
 
-- **Custom Copier/Yanker:**
-  - `<leader>ya + Enter>`: Yank entire file
-  - `<leader>ya + {number}>`: Yank {number} lines
-  - `<leader>ya + {input}>`: Yank entire file
+- `gcc`: Toggle line comment
+- `gbc`: Toggle block comment
+- `gc`: Comment in visual mode
+- `gb`: Block comment in visual mode
 
-### Language Server Protocol (LSP)
+### Custom Copier/Yanker
+
+- `<leader>ya + Enter>`: Yank the entire file
+- `<leader>ya + {number}>`: Yank {number} lines
+- `<leader>ya + {input}>`: Yank entire file
+
+## Language Server Protocol (LSP)
 
 - `gd`: Go to definition
 - `gr`: Go to references
 - `gi`: Go to implementation
-- `K`: Hover information
-- `<C-k>`: Signature help
+- `K`: Show hover information
+- `<C-k>`: Show signature help
 - `<leader>rn>`: Rename symbol
-- `<leader>ca>`: Code action
+- `<leader>ca>`: Trigger code action
 - `<leader>gf>`: Format buffer
 - `<leader>gr>`: Find references
 - `<leader>gd>`: Go to definition
 
-### Completion (nvim-cmp)
+## Completion (nvim-cmp)
 
 - `<C-n/Down>`: Next item
 - `<C-p/Up>`: Previous item
@@ -131,9 +135,22 @@
 - `<C-Space>`: Open completion menu
 - `<C-e>`: Close completion menu
 
-### Copilot
+## Copilot
 
 - `<Tab>`: Accept suggestion
 - `<C-]>`: Dismiss suggestion
-- `<M-]`: Next suggestion
+- `<M-]>`: Next suggestion
 - `<M-[>`: Previous suggestion
+
+## Avante for Neovim
+
+The following key bindings are available for `avante.nvim`:
+
+- `<Leader>aa`: Show sidebar
+- `<Leader>ar`: Refresh sidebar
+- `co`: Choose ours
+- `ct`: Choose theirs
+- `cb`: Choose both
+- `c0`: Choose none
+- `]x`: Move to the previous conflict
+- `[x`: Move to the next conflict
