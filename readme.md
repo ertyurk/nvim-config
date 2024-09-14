@@ -150,7 +150,16 @@ The following key bindings are available for `avante.nvim`:
 - `<Leader>ar`: Refresh sidebar
 - `co`: Choose ours
 - `ct`: Choose theirs
+- `ca`: Choose all
 - `cb`: Choose both
 - `c0`: Choose none
 - `]x`: Move to the previous conflict
 - `[x`: Move to the next conflict
+- `<M-l>`: Accept suggestion
+- `<M-]>`: Next suggestion
+- `<M-[>`: Previous suggestion
+- `<C-]>`: Dismiss suggestion
+- `]]`: Jump to the next conflict
+- `[[`: Jump to the previous conflict
+- `<CR>`: Submit the current conflict
+- `<C-s>`: Submit the current conflict in insert mode
