@@ -1,4 +1,4 @@
-# Avante for Neovim - Setup Guide
+# Base
 
 ## Motions
 
