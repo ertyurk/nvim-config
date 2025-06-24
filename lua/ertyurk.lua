@@ -76,3 +76,14 @@ vim.opt.laststatus = 3
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
 vim.opt.splitkeep = "screen"
+
+-- Add these settings
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.wrap = true
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+
+-- Add visual block mode mappings
+vim.keymap.set("v", "<S-i>", "<C-v>I", { desc = "Insert at beginning of block" })
+vim.keymap.set("v", "<S-a>", "<C-v>A", { desc = "Append at end of block" })

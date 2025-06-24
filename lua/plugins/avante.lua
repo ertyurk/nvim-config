@@ -1,108 +1,58 @@
 return {
 	"yetone/avante.nvim",
-	enabled = true,
+	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+	-- ⚠️ must add this setting! ! !
+	build = function()
+		-- conditionally use the correct build system for the current OS
+		if vim.fn.has("win32") == 1 then
+			return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+		else
+			return "make"
+		end
+	end,
 	event = "VeryLazy",
-	lazy = false,
-	version = false,
-	build = "make",
+	version = false, -- Never set this value to "*"! Never!
+	---@module 'avante'
+	---@type avante.Config
 	opts = {
-		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-		provider = "claude", -- Recommend using Claude
-		auto_suggestions_provider = "claude",
-		claude = {
-			endpoint = "https://api.anthropic.com",
-			model = "claude-3-5-sonnet-20240620",
-			temperature = 0,
-			max_tokens = 4096,
-		},
-		-- provider = "openai",
-		-- auto_suggestions_provider = "openai",
-		-- ---@type AvanteSupportedProvider
-		-- openai = {
-		-- 	endpoint = "https://api.openai.com/v1",
-		-- 	model = "gpt-4o",
-		-- 	timeout = 30000, -- Timeout in milliseconds
-		-- 	temperature = 0,
-		-- 	max_tokens = 4096,
-		-- 	["local"] = false,
-		-- },
-		behaviour = {
-			auto_suggestions = false,
-			auto_set_highlight_group = true,
-			auto_set_keymaps = true,
-			auto_apply_diff_after_generation = false,
-			support_paste_from_clipboard = false,
-		},
-		mappings = {
-			ask = "<leader>aa",
-			edit = "<leader>ae",
-			refresh = "<leader>ar",
-			--- @class AvanteConflictMappings
-			diff = {
-				ours = "co",
-				theirs = "ct",
-				all_theirs = "ca",
-				both = "cb",
-				cursor = "cc",
-				next = "]x",
-				prev = "[x",
+		-- add any opts here
+		-- for example
+		provider = "openai", -- or 'claude', 'file_selector', 'input', 'copilot', 'none'
+		providers = {
+			claude = {
+				endpoint = "https://api.anthropic.com",
+				model = "claude-sonnet-4-20250514",
+				timeout = 30000, -- Timeout in milliseconds
+				extra_request_body = {
+					temperature = 0.75,
+					max_tokens = 20480,
+				},
 			},
-			suggestion = {
-				accept = "<M-l>",
-				next = "<M-]>",
-				prev = "<M-[>",
-				dismiss = "<C-]>",
+			openai = {
+				endpoint = "https://api.openai.com/v1",
+				model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+				timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+				extra_request_body = {
+					temperature = 0,
+					max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+					reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+				},
 			},
-			jump = {
-				next = "]]",
-				prev = "[[",
-			},
-			submit = {
-				normal = "<CR>",
-				insert = "<C-s>",
-			},
-		},
-		hints = { enabled = true },
-		windows = {
-			---@type "right" | "left" | "top" | "bottom"
-			position = "right", -- the position of the sidebar
-			wrap = true, -- similar to vim.o.wrap
-			width = 30, -- default % based on available width
-			sidebar_header = {
-				align = "center", -- left, center, right for title
-				rounded = true,
-			},
-		},
-		highlights = {
-			---@type AvanteConflictHighlights
-			diff = {
-				current = "DiffText",
-				incoming = "DiffAdd",
-			},
-		},
-		--- @class AvanteConflictUserConfig
-		diff = {
-			debug = false,
-			autojump = true,
-			---@type string | fun(): any
-			list_opener = "copen",
 		},
 	},
 	dependencies = {
-		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-		"stevearc/dressing.nvim",
+		"nvim-treesitter/nvim-treesitter",
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
-		"hrsh7th/nvim-cmp",
-		"zbirenbaum/copilot.lua",
-		--- The below is optional, make sure to setup it properly if you have lazy=true
-		{
-			"MeanderingProgrammer/render-markdown.nvim",
-			opts = {
-				file_types = { "markdown", "Avante" },
-			},
-			ft = { "markdown", "Avante" },
-		},
+		--- The below dependencies are optional,
+		"echasnovski/mini.pick", -- for file_selector provider mini.pick
+		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+		"ibhagwan/fzf-lua", -- for file_selector provider fzf
+		"stevearc/dressing.nvim", -- for input provider dressing
+		"folke/snacks.nvim", -- for input provider snacks
+		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+		"zbirenbaum/copilot.lua", -- for providers='copilot'
 		{
 			-- support for image pasting
 			"HakonHarnes/img-clip.nvim",
@@ -119,6 +69,14 @@ return {
 					use_absolute_path = true,
 				},
 			},
+		},
+		{
+			-- Make sure to set this up properly if you have lazy=true
+			"MeanderingProgrammer/render-markdown.nvim",
+			opts = {
+				file_types = { "markdown", "Avante" },
+			},
+			ft = { "markdown", "Avante" },
 		},
 	},
 }

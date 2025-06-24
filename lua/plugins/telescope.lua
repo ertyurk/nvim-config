@@ -13,15 +13,15 @@ return {
 			-- local actions = require("telescope.actions")
 			-- local browser = telescope.extensions.file_browser
 
-			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find files" })
+			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
 			-- vim.keymap.set("n", "<leader>fb", browser.file_browser, { noremap = true })
 			-- instead of opening the root folder always, i choose the open the folder from buffer path that i am in.
 			vim.keymap.set(
 				"n",
 				"<leader>fb",
 				":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-				{ noremap = true }
+				{ noremap = true, desc = "File browser" }
 			)
 
 			telescope.setup({
