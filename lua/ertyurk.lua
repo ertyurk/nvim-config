@@ -76,3 +76,16 @@ vim.opt.sidescrolloff = 8
 -- Add visual block mode mappings
 vim.keymap.set("v", "<S-i>", "<C-v>I", { desc = "Insert at beginning of block" })
 vim.keymap.set("v", "<S-a>", "<C-v>A", { desc = "Append at end of block" })
+
+-- Window navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+
+-- Window management
+vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Close current window" })
+vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Close all other windows" })
+vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>w=", "<C-w>=", { desc = "Make windows equal size" })

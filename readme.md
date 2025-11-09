@@ -36,6 +36,9 @@
 | **Debug** | Toggle breakpoint | `<leader>db` |
 | | Continue | `<leader>dc` |
 | | Step over/into/out | `<leader>do/di/dO` |
+| **Windows** | Navigate windows | `<C-h/j/k/l>` |
+| | Close current window | `<leader>wq` or `:q` |
+| | Close other windows | `<leader>wo` |
 
 **Note**: `<leader>` is mapped to `<Space>`
 
@@ -303,14 +306,48 @@ c0              - Choose none
   {number}      - Yank N lines
 ```
 
-### Tmux Navigation
+### Window Management (Splits)
 
+#### Navigation Between Windows
 ```
-<C-h>           - Navigate left (works in tmux)
-<C-j>           - Navigate down (works in tmux)
-<C-k>           - Navigate up (works in tmux)
-<C-l>           - Navigate right (works in tmux)
-<C-\>           - Navigate to previous
+<C-h>           - Move to left window
+<C-j>           - Move to bottom window
+<C-k>           - Move to top window
+<C-l>           - Move to right window
+<C-w>w          - Cycle through windows
+<C-w>p          - Go to previous window
+```
+
+#### Window Actions
+```
+<leader>wq      - Close current window (:q)
+<leader>wo      - Close all other windows
+<leader>ws      - Split horizontally
+<leader>wv      - Split vertically
+<leader>w=      - Make all windows equal size
+:q              - Close current window
+<C-w>q          - Close current window (alternative)
+<C-w>o          - Close all other windows
+```
+
+#### Window Resizing
+```
+<C-w>=          - Make all windows equal size
+<C-w>_          - Maximize current window height
+<C-w>|          - Maximize current window width
+<C-w>+          - Increase height
+<C-w>-          - Decrease height
+<C-w>>          - Increase width
+<C-w><          - Decrease width
+```
+
+#### Moving Windows Around
+```
+<C-w>H          - Move window to far left (full height)
+<C-w>J          - Move window to bottom (full width)
+<C-w>K          - Move window to top (full width)
+<C-w>L          - Move window to far right (full height)
+<C-w>r          - Rotate windows
 ```
 
 ---
@@ -447,6 +484,14 @@ Enhanced syntax for:
 3. **Apply quick fixes**: `<leader>ca` on diagnostic
 4. **Preview git changes**: `<leader>hp`
 
+### Working with Splits (Windows)
+
+1. **Go to definition in split**: `<leader>gd` opens definition below, use `<C-j>` to navigate to it
+2. **Close split after viewing**: Press `:q` or `<leader>wq`
+3. **Keep only current**: `<leader>wo` or `<C-w>o` closes all other windows
+4. **Compare side-by-side**: `<leader>wv` to split vertically, then open another file
+5. **Quick navigation**: Use `<C-h/j/k/l>` to jump between splits without thinking
+
 ---
 
 ## Project Structure
@@ -465,11 +510,11 @@ Enhanced syntax for:
 │       ├── lsp-config.lua  # LSP servers
 │       ├── lualine.lua     # Status line
 │       ├── none-ls.lua     # Formatting
+│       ├── plugins.lua     # Copilot configuration
 │       ├── react.lua       # React/JSX features
 │       ├── telescope.lua   # Fuzzy finder
 │       ├── theme.lua       # Gruvbox theme
-│       ├── treesitter.lua  # Syntax highlighting
-│       └── vim-tmux.lua    # Tmux integration
+│       └── treesitter.lua  # Syntax highlighting
 └── lazy-lock.json          # Plugin versions
 ```
 
