@@ -16,18 +16,16 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "lua_ls",
-                    "gopls",
                     "pyright",
-                    "sqls",
+                    "ruff",
                     "svelte",
                     "tailwindcss",
                     "cssls",
                     "ts_ls",
-                    "templ",
                     "jsonls",
                     "html",
-                    "htmx",
                     "rust_analyzer",
+                    "eslint",
                 },
             })
         end,
@@ -40,16 +38,14 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local servers = {
                 "lua_ls",
-                "gopls",
                 "pyright",
-                "sqls",
+                "ruff",
                 "svelte",
                 "cssls",
                 "ts_ls",
-                "templ",
                 "jsonls",
-                "gleam",
                 "rust_analyzer",
+                "eslint",
             }
             for _, server_name in ipairs(servers) do
                 vim.lsp.config[server_name] = {
@@ -63,7 +59,8 @@ return {
             vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
             vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Go to references" })
             vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-            vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Show signature help" })
+            vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Show signature help" })
+            vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Show signature help" })
             vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
             vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
             vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format buffer" })
@@ -78,6 +75,8 @@ return {
         ft = "rust",
         config = function()
             vim.g.rustfmt_autosave = 1
+            vim.g.rustfmt_command = "rustfmt"
+            vim.g.rustfmt_options = ""
         end,
     },
     {
@@ -88,7 +87,34 @@ return {
                 popup = {
                     border = "rounded",
                 },
+                lsp = {
+                    enabled = true,
+                    actions = true,
+                    completion = true,
+                    hover = true,
+                },
             })
+        end,
+    },
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^5",
+        ft = { "rust" },
+        config = function()
+            vim.g.rustaceanvim = {
+                server = {
+                    default_settings = {
+                        ["rust-analyzer"] = {
+                            cargo = {
+                                allFeatures = true,
+                            },
+                            check = {
+                                command = "clippy",
+                            },
+                        },
+                    },
+                },
+            }
         end,
     },
 }

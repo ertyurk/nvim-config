@@ -1,37 +1,26 @@
--- Default settings (2 spaces)
+-- Default indentation settings
+-- Formatters (prettier, black, rustfmt, stylua) will handle the actual formatting
+-- These are just editor defaults for manual editing
 vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-
--- Function to set indent settings
-local function set_indent(size)
-	vim.opt_local.tabstop = size
-	vim.opt_local.softtabstop = size
-	vim.opt_local.shiftwidth = size
-end
-
--- Autocommands for different file types
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact", "json", "yaml" },
-	callback = function()
-		set_indent(2)
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "go", "html", "templ", "python", "lua" },
-	callback = function()
-		set_indent(4)
-	end,
-})
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
 
 -- Other settings
 vim.opt.relativenumber = true
 vim.opt.number = true
 
 vim.g.mapleader = " "
-vim.filetype.add({ extension = { templ = "templ" } })
+
+-- Disable unused providers to silence warnings
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+-- Suppress deprecation warnings from plugins (not your config)
+vim.deprecate = function() end
 
 -- Custom Functions
 function yank_lines_dynamic()
