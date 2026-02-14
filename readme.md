@@ -39,6 +39,11 @@
 | **Windows** | Navigate windows | `<C-h/j/k/l>` |
 | | Close current window | `<leader>wq` or `:q` |
 | | Close other windows | `<leader>wo` |
+| **AI (OpenCode)** | Toggle terminal | `<leader>ot` |
+| | Ask AI | `<leader>oa` |
+| | Select action | `<leader>oo` |
+| | Explain code | `<leader>oe` |
+| | Fix errors | `<leader>of` |
 
 **Note**: `<leader>` is mapped to `<Space>`
 
@@ -278,25 +283,74 @@ ih              - Select hunk (text object)
 
 **Breakpoint icons**: 🔴 = breakpoint, 🟡 = conditional, ▶️ = stopped, ❌ = rejected
 
-### Avante (AI Assistant)
+### OpenCode (AI Assistant)
 
+Integrates the opencode CLI with Neovim for editor-aware AI assistance.
+
+#### Opening & Closing
 ```
-<Leader>aa      - Show AI sidebar
-<Leader>ar      - Refresh AI sidebar
-<CR>            - Submit prompt
-<C-s>           - Submit (insert mode)
+<Leader>ot      - Toggle opencode terminal
+<Leader>oo      - Open picker (browse all features)
+<Leader>oa      - Ask opencode (input prompt)
 ```
 
-**Conflict Resolution**:
+#### Asking Questions
 ```
-co              - Choose ours
-ct              - Choose theirs
-ca              - Choose all
-cb              - Choose both
-c0              - Choose none
-]x / [x         - Next/Previous conflict
-]] / [[         - Jump to next/previous conflict
+<Leader>oa      - Open ask input (normal mode)
+<Leader>oa      - Ask about selection (visual mode)
+go{motion}      - Operator: ask about motion target
+goo             - Operator: ask about current line
+goiw            - Operator: ask about word under cursor
+goap            - Operator: ask about paragraph
 ```
+
+#### Built-in Prompts
+```
+<Leader>oe      - Explain code
+<Leader>or      - Review code for correctness
+<Leader>of      - Fix diagnostics/errors
+<Leader>od      - Add documentation/comments
+<Leader>oi      - Implement stub code
+<Leader>oz      - Optimize for performance/readability
+<Leader>oT      - Generate test cases
+```
+
+#### Session Management
+```
+<Leader>on      - New session (fresh conversation)
+<Leader>ol      - List all sessions
+<Leader>oc      - Compact session (reduce context)
+<Leader>ox      - Interrupt current operation
+```
+
+#### Context Placeholders (in prompts)
+
+Use these in your prompts to inject context:
+```
+@this           - Selection, range, or cursor position
+@buffer         - Current buffer content
+@buffers        - All open buffers
+@visible        - Visible text on screen
+@diagnostics    - LSP/lint diagnostics
+@quickfix       - Quickfix list items
+@diff           - Git diff output
+@marks          - Global mark positions
+```
+
+**Example prompts:**
+- `explain @this` - Explain selected code
+- `fix @diagnostics` - Fix current file errors
+- `review @diff` - Review git changes
+
+#### Inside OpenCode Terminal
+```
+<S-C-u>         - Scroll half page up
+<S-C-d>         - Scroll half page down
+```
+
+#### Requirements
+- Install opencode CLI: `go install github.com/sst/opencode@latest`
+- Run opencode with `--port` flag for Neovim integration
 
 ### Custom Yanker
 
@@ -502,7 +556,7 @@ Enhanced syntax for:
 ├── lua/
 │   ├── ertyurk.lua         # General settings & keymaps
 │   └── plugins/            # Plugin configurations
-│       ├── avante.lua      # AI assistant
+│       ├── opencode.lua    # AI assistant (opencode.nvim)
 │       ├── comment.lua     # Commenting
 │       ├── completions.lua # Auto-completion
 │       ├── dap.lua         # Debugging
