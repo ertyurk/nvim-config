@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.5",
+		branch = "master",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
@@ -10,35 +10,37 @@ return {
 			local builtin = require("telescope.builtin")
 			local telescope = require("telescope")
 			local fb_actions = telescope.extensions.file_browser.actions
-			-- local actions = require("telescope.actions")
-			-- local browser = telescope.extensions.file_browser
 
 			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find files" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
-			-- vim.keymap.set("n", "<leader>fb", browser.file_browser, { noremap = true })
-			-- instead of opening the root folder always, i choose the open the folder from buffer path that i am in.
 			vim.keymap.set(
 				"n",
 				"<leader>fb",
 				":Telescope file_browser path=%:p:h select_buffer=true<CR>",
 				{ noremap = true, desc = "File browser" }
 			)
+			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
+			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Diagnostics" })
+			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume last search" })
+			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Recent files" })
+			vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Document symbols" })
+			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep word under cursor" })
 
 			telescope.setup({
 				defaults = {
 					file_ignore_patterns = {
 						".DS_Store",
-						"package-lock.json",
-						"pnpm-lock.yaml",
-						"yarn-lock.json",
-					},
-					folder_ignore_patterns = {
-						"node_modules",
-						".idea",
-						".svelte-kit",
-						".cache",
-						".git",
-						".vscode",
+						"package%-lock%.json",
+						"pnpm%-lock%.yaml",
+						"yarn%-lock%.json",
+						"node_modules/",
+						".idea/",
+						".svelte%-kit/",
+						".cache/",
+						"%.git/",
+						".vscode/",
+						"target/debug/",
+						"target/release/",
 					},
 				},
 				extensions = {
@@ -54,7 +56,6 @@ return {
 							preview_width = 0.5,
 							prompt_position = "bottom",
 						},
-						-- disables netrw and use telescope-file-browser in its place
 						hijack_netrw = true,
 						mappings = {
 							["i"] = {
@@ -64,7 +65,6 @@ return {
 							["n"] = {
 								["c"] = fb_actions.create,
 								["r"] = fb_actions.rename,
-								-- ["<CR>"] = fb_actions.toggle_tree,
 							},
 						},
 					},

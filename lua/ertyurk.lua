@@ -7,13 +7,46 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
--- Set 2 spaces for JavaScript/TypeScript files
+-- Set 2 spaces for web/config files
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc" },
+	pattern = {
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"json",
+		"jsonc",
+		"html",
+		"css",
+		"scss",
+		"svelte",
+		"yaml",
+		"toml",
+		"markdown",
+		"xml",
+		"graphql",
+	},
 	callback = function()
 		vim.opt_local.tabstop = 2
 		vim.opt_local.softtabstop = 2
 		vim.opt_local.shiftwidth = 2
+	end,
+})
+
+-- Treat .env files as dotenv (bash highlighting + # comments, no BashLS linting)
+vim.filetype.add({
+	pattern = {
+		["%.env"] = "dotenv",
+		["%.env%..*"] = "dotenv",
+		[".*%.env"] = "dotenv",
+		[".*%.env%..*"] = "dotenv",
+	},
+})
+vim.treesitter.language.register("bash", "dotenv")
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.env", ".env.*" },
+	callback = function()
+		vim.bo.filetype = "dotenv"
 	end,
 })
 
@@ -31,6 +64,15 @@ vim.g.loaded_ruby_provider = 0
 
 -- Suppress deprecation warnings from plugins (not your config)
 vim.deprecate = function() end
+
+-- Suppress harmless offset_encoding warnings (copilot uses utf-16, other LSPs use utf-8)
+local original_notify = vim.notify
+vim.notify = function(msg, ...)
+	if type(msg) == "string" and (msg:match("offset_encoding") or msg:match("position_encoding")) then
+		return
+	end
+	return original_notify(msg, ...)
+end
 
 -- Custom Functions
 function yank_lines_dynamic()
@@ -67,7 +109,7 @@ function yank_lines_dynamic()
 	print(count .. " line(s) yanked to clipboard")
 end
 
-vim.api.nvim_set_keymap("n", "<leader>ya", ":lua yank_lines_dynamic()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ya", yank_lines_dynamic, { desc = "Yank lines to clipboard" })
 
 -- Avante
 -- views can only be fully collapsed with the global statusline
@@ -83,9 +125,34 @@ vim.opt.wrap = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 
--- Add visual block mode mappings
-vim.keymap.set("v", "<S-i>", "<C-v>I", { desc = "Insert at beginning of block" })
-vim.keymap.set("v", "<S-a>", "<C-v>A", { desc = "Append at end of block" })
+-- Clear search highlights with Escape
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
+
+-- Move lines up/down
+vim.keymap.set("n", "<A-j>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+-- Stay in visual mode after indenting
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+
+-- Keep cursor centered on scroll/search
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down centered" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up centered" })
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result centered" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search result centered" })
+
+-- Buffer navigation
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
+vim.keymap.set("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "[b", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+
+-- Paste over selection without losing register
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without losing register" })
 
 -- Window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })

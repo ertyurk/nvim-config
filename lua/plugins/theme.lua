@@ -1,17 +1,18 @@
 return {
-  "ellisonleao/gruvbox.nvim",
-  priority = 1000,
-  config = function()
-    vim.cmd [[
-      let g:gruvbox_contrast_dark = 'hard'
-      let g:gruvbox_contrast_light = 'hard'
-      let g:gruvbox_italic = 1
-      let g:gruvbox_bold = 1
-      let g:italic_comments = 1
-      let g:italic_operator = 1
-      let g:italic_emphasis = 1
-      let g:gruvbox_emphasis = 'bold'
-      colorscheme gruvbox
-      ]]
-  end
+	"ellisonleao/gruvbox.nvim",
+	priority = 1000,
+	config = function()
+		require("gruvbox").setup({
+			contrast = "hard",
+			italic = {
+				strings = false,
+				emphasis = true,
+				comments = true,
+				operators = true,
+				folds = true,
+			},
+			bold = true,
+		})
+		vim.cmd.colorscheme("gruvbox")
+	end,
 }

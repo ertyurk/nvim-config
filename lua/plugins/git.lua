@@ -1,15 +1,30 @@
 return {
 	{
 		"tpope/vim-fugitive",
-		cmd = { "Git", "G", "Gdiffsplit", "Gvdiffsplit", "Gedit", "Gsplit", "Gread", "Gwrite", "Ggrep", "GMove", "GRename", "GDelete", "GRemove", "GBrowse" },
+		cmd = {
+			"Git",
+			"G",
+			"Gdiffsplit",
+			"Gvdiffsplit",
+			"Gedit",
+			"Gsplit",
+			"Gread",
+			"Gwrite",
+			"Ggrep",
+			"GMove",
+			"GRename",
+			"GDelete",
+			"GRemove",
+			"GBrowse",
+		},
 		keys = {
 			{ "<leader>gs", "<cmd>Git<cr>", desc = "Git status" },
 			{ "<leader>gc", "<cmd>Git commit<cr>", desc = "Git commit" },
 			{ "<leader>gp", "<cmd>Git push<cr>", desc = "Git push" },
 			{ "<leader>gl", "<cmd>Git pull<cr>", desc = "Git pull" },
 			{ "<leader>gb", "<cmd>Git blame<cr>", desc = "Git blame" },
-			{ "<leader>gd", "<cmd>Gdiffsplit<cr>", desc = "Git diff split" },
-			{ "<leader>gv", "<cmd>Gvdiffsplit<cr>", desc = "Git vertical diff split" },
+			{ "<leader>gD", "<cmd>Gdiffsplit<cr>", desc = "Git diff split" },
+			{ "<leader>gV", "<cmd>Gvdiffsplit<cr>", desc = "Git vertical diff split" },
 		},
 	},
 	{
@@ -74,6 +89,7 @@ return {
 					map("n", "<leader>hD", function()
 						gs.diffthis("~")
 					end, { desc = "Diff this ~" })
+					map("n", "<leader>hB", gs.toggle_current_line_blame, { desc = "Toggle inline blame" })
 
 					-- Text object
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select hunk" })

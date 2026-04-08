@@ -1,12 +1,30 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-        local config = require("nvim-treesitter.configs")
-        config.setup({
-            ensure_installed = { "lua", "javascript", "typescript", "tsx", "python", "svelte", "regex", "rust", "css", "html" },
-            highlight = { enable = true },
-            indent = { enable = true },
-        })
-    end,
+	"nvim-treesitter/nvim-treesitter",
+	branch = "main",
+	build = ":TSUpdate",
+	config = function()
+		require("nvim-treesitter").setup({
+			ensure_installed = {
+				"lua",
+				"javascript",
+				"typescript",
+				"tsx",
+				"python",
+				"svelte",
+				"regex",
+				"rust",
+				"css",
+				"html",
+				"markdown",
+				"markdown_inline",
+				"json",
+				"yaml",
+				"toml",
+				"bash",
+				"vimdoc",
+				"xml",
+				"graphql",
+			},
+		})
+	end,
 }

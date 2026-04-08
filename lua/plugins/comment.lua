@@ -7,7 +7,6 @@ return {
 		},
 		config = function()
 			require("Comment").setup({
-				-- Add Treesitter integration for context-aware commenting
 				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 				-- Basic mappings
 				toggler = {
@@ -37,7 +36,10 @@ return {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		lazy = true,
 		opts = {
-			enable_autocmd = false, -- We handle this via Comment.nvim pre_hook
+			enable_autocmd = false,
+			languages = {
+				dotenv = "# %s",
+			},
 		},
 	},
 }
