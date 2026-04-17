@@ -24,6 +24,10 @@ return {
 		null_ls.setup({
 			sources = {
 				null_ls.builtins.formatting.stylua,
+				null_ls.builtins.formatting.prettier.with({
+					filetypes = { "markdown", "markdown.mdx" },
+					extra_args = { "--prose-wrap", "always", "--print-width", "80" },
+				}),
 			},
 			on_attach = on_attach,
 		})
