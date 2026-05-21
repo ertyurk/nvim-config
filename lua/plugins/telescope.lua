@@ -11,8 +11,7 @@ return {
 			local telescope = require("telescope")
 			local fb_actions = telescope.extensions.file_browser.actions
 
-			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find files" })
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
+			-- File find + grep handled by fff.nvim. Telescope keeps non-file pickers + file browser:
 			vim.keymap.set(
 				"n",
 				"<leader>fb",

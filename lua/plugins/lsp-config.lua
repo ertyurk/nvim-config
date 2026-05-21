@@ -106,15 +106,6 @@ return {
 		end,
 	},
 	{
-		"rust-lang/rust.vim",
-		ft = "rust",
-		config = function()
-			vim.g.rustfmt_autosave = 1
-			vim.g.rustfmt_command = "rustfmt"
-			vim.g.rustfmt_options = ""
-		end,
-	},
-	{
 		"saecki/crates.nvim",
 		ft = { "rust", "toml" },
 		config = function()
