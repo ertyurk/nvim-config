@@ -13,8 +13,10 @@ return {
 			{ "<leader>f", group = "find" },
 			{ "<leader>g", group = "git/goto" },
 			{ "<leader>h", group = "git hunks" },
+			{ "<leader>l", group = "lint" },
 			{ "<leader>o", group = "opencode" },
 			{ "<leader>r", group = "refactor" },
+			{ "<leader>t", group = "tailwind" },
 			{ "<leader>w", group = "windows" },
 			{ "<leader>y", group = "yank" },
 		})

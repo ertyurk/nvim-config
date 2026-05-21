@@ -28,10 +28,29 @@ Leader = `<Space>`. Auto-shown via which-key (300ms delay).
 | `<leader>k` / `<C-k>` (insert) | signature help |
 | `<leader>rn` | rename symbol |
 | `<leader>ca` | code actions (n+v) |
-| `<leader>gf` | format buffer |
+| `<leader>gf` | format buffer (conform, n+v) |
 | `<leader>e` | show diagnostic float |
 | `<leader>q` | diagnostics loclist |
 | `[d` / `]d` | prev / next diagnostic |
+| `<leader>ll` | trigger nvim-lint |
+
+## Format / Lint (conform + nvim-lint)
+
+| Key / Cmd | Action |
+|---|---|
+| `<leader>gf` | format buffer (async, LSP fallback) |
+| `:FormatDisable` | disable autoformat-on-save globally |
+| `:FormatDisable!` | disable autoformat-on-save for buffer |
+| `:FormatEnable` | re-enable autoformat-on-save |
+| `<leader>ll` | run linters on buffer |
+
+## Tailwind
+
+| Key | Action |
+|---|---|
+| `<leader>ts` | sort Tailwind classes |
+| `<leader>tc` | toggle conceal |
+| `<leader>tC` | toggle color swatches |
 
 ## Git (fugitive)
 
@@ -56,8 +75,8 @@ Leader = `<Space>`. Auto-shown via which-key (300ms delay).
 | `<leader>hu` | undo stage hunk |
 | `<leader>hR` | reset buffer |
 | `<leader>hp` | preview hunk |
-| `<leader>hb` | blame line (full) |
-| `<leader>hB` | toggle inline blame |
+| `<leader>hb` | blame line (full popup) |
+| `<leader>hB` | toggle inline blame (virt-text on cursor line) |
 | `<leader>hd` | diff this |
 | `<leader>hD` | diff this `~` |
 | `ih` (o/x) | hunk text object |
@@ -175,4 +194,4 @@ Normal mode (press `<Esc>` first):
 
 ## which-key groups
 
-`<leader>` then wait 300ms → menu shows: `b` buffer, `c` code, `d` debug, `f` find, `g` git/goto, `h` git hunks, `o` opencode, `r` refactor, `w` windows, `y` yank.
+`<leader>` then wait 300ms → menu shows: `b` buffer, `c` code, `d` debug, `f` find, `g` git/goto, `h` git hunks, `l` lint, `o` opencode, `r` refactor, `t` tailwind, `w` windows, `y` yank.
