@@ -38,6 +38,27 @@ return {
 		lazy = false,
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			-- uv-native python resolver: walk up for .venv/bin/python
+			local function find_uv_python()
+				local cwd = vim.fn.getcwd()
+				local hits = vim.fs.find({ ".venv" }, {
+					upward = true,
+					path = cwd,
+					stop = vim.loop.os_homedir(),
+					type = "directory",
+				})
+				local venv_dir = hits[1]
+				if not venv_dir then
+					return nil, nil
+				end
+				local py = venv_dir .. "/bin/python"
+				if vim.fn.executable(py) == 1 then
+					return py, vim.fs.dirname(venv_dir)
+				end
+				return nil, nil
+			end
+
 			local servers = {
 				"lua_ls",
 				"pyright",
@@ -53,10 +74,30 @@ return {
 				"marksman",
 			}
 			for _, server_name in ipairs(servers) do
-				vim.lsp.config[server_name] = {
+				local cfg = {
 					cmd = vim.lsp.config[server_name] and vim.lsp.config[server_name].cmd or nil,
 					capabilities = capabilities,
 				}
+				if server_name == "pyright" then
+					cfg.before_init = function(_, config)
+						local py, venv_root = find_uv_python()
+						if not py then
+							return
+						end
+						config.settings = config.settings or {}
+						config.settings.python = vim.tbl_deep_extend("force", config.settings.python or {}, {
+							pythonPath = py,
+							venvPath = venv_root,
+							venv = ".venv",
+						})
+					end
+				elseif server_name == "ruff" then
+					local py = find_uv_python()
+					if py then
+						cfg.init_options = { settings = { interpreter = { py } } }
+					end
+				end
+				vim.lsp.config[server_name] = cfg
 				vim.lsp.enable(server_name)
 			end
 
