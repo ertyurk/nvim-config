@@ -17,13 +17,13 @@ return {
 				},
 				ensure_installed = {
 					"lua_ls",
-					"pyright",
+					"basedpyright",
 					"ruff",
 					"biome",
 					"svelte",
 					"tailwindcss",
 					"cssls",
-					"ts_ls",
+					"vtsls",
 					"jsonls",
 					"html",
 					"taplo",
@@ -61,13 +61,13 @@ return {
 
 			local servers = {
 				"lua_ls",
-				"pyright",
+				"basedpyright",
 				"ruff",
 				"biome",
 				"svelte",
 				"tailwindcss",
 				"cssls",
-				"ts_ls",
+				"vtsls",
 				"jsonls",
 				"html",
 				"taplo",
@@ -78,7 +78,7 @@ return {
 					cmd = vim.lsp.config[server_name] and vim.lsp.config[server_name].cmd or nil,
 					capabilities = capabilities,
 				}
-				if server_name == "pyright" then
+				if server_name == "basedpyright" then
 					cfg.before_init = function(_, config)
 						local py, venv_root = find_uv_python()
 						if not py then
@@ -118,7 +118,7 @@ return {
 			vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Show signature help" })
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
-			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format buffer" })
+			-- <leader>gf bound by conform.nvim
 
 			-- Diagnostics
 			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic" })
