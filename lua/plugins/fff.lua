@@ -63,11 +63,11 @@ return {
       hl(0, name, opts_)
     end
 
-    set("FFFBorder",      { fg = yellow, bg = bg0_h })
+    set("FFFBorder",      { fg = fg4,    bg = bg0_h })
     set("FFFNormal",      { fg = fg1,    bg = bg0_h })
-    set("FFFTitle",       { fg = yellow, bg = bg0_h, bold = true })
+    set("FFFTitle",       { fg = fg4,    bg = bg0_h, bold = true })
     set("FFFPrompt",      { fg = orange, bg = bg0_h, bold = true })
-    set("FFFMatched",     { fg = orange, bg = bg1,   bold = true })
+    set("FFFMatched",     { fg = bg0_h,  bg = orange, bold = true })
     set("FFFCursor",      { bg = bg2 })
     set("FFFFrecency",    { fg = purple, italic = true })
     set("FFFDirPath",     { fg = gray,   italic = true })
@@ -90,7 +90,6 @@ return {
     })
   end,
   keys = {
-    { "<C-p>", function() require("fff").find_files() end, desc = "Find files (fff)" },
     { "<leader>ff", function() require("fff").find_files() end, desc = "Find files (fff)" },
     {
       "<leader>fg",
