@@ -1,4 +1,16 @@
 return {
+	{
+		-- Installs non-LSP CLI tools (linters/formatters) into Mason's bin.
+		-- mason-lspconfig only handles LSP servers, so markdownlint goes here.
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		config = function()
+			require("mason-tool-installer").setup({
+				ensure_installed = { "markdownlint" },
+			})
+		end,
+	},
+	{
 	"mfussenegger/nvim-lint",
 	event = { "BufReadPost", "BufWritePost", "InsertLeave" },
 	config = function()
@@ -24,4 +36,5 @@ return {
 			lint.try_lint()
 		end, { desc = "Trigger lint" })
 	end,
+	},
 }
