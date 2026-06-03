@@ -12,9 +12,11 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				automatic_installation = { exclude = { "rust_analyzer" } },
-				automatic_enable = {
-					exclude = { "rust_analyzer" },
-				},
+				-- Don't auto-enable every installed server. Servers are enabled
+				-- explicitly below (with per-server config like the uv venv
+				-- before_init for basedpyright). Auto-enable would also start a
+				-- stray `pyright` with no venv → false "could not be resolved".
+				automatic_enable = false,
 				ensure_installed = {
 					"lua_ls",
 					"basedpyright",
