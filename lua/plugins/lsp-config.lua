@@ -14,12 +14,15 @@ return {
 				automatic_installation = { exclude = { "rust_analyzer" } },
 				-- Don't auto-enable every installed server. Servers are enabled
 				-- explicitly below (with per-server config like the uv venv
-				-- before_init for basedpyright). Auto-enable would also start a
-				-- stray `pyright` with no venv → false "could not be resolved".
+				-- interpreter for ruff). Auto-enable would also start a stray
+				-- `pyright` with no venv → false "could not be resolved".
+				--
+				-- Python types are handled by `ty` (astral), which is NOT here:
+				-- mason does not package it. Install it with `uv tool install ty`
+				-- and keep it current with `uv tool upgrade ty`.
 				automatic_enable = false,
 				ensure_installed = {
 					"lua_ls",
-					"basedpyright",
 					"ruff",
 					"biome",
 					"svelte",
@@ -63,7 +66,7 @@ return {
 
 			local servers = {
 				"lua_ls",
-				"basedpyright",
+				"ty",
 				"ruff",
 				"biome",
 				"svelte",
@@ -80,20 +83,10 @@ return {
 					cmd = vim.lsp.config[server_name] and vim.lsp.config[server_name].cmd or nil,
 					capabilities = capabilities,
 				}
-				if server_name == "basedpyright" then
-					cfg.before_init = function(_, config)
-						local py, venv_root = find_uv_python()
-						if not py then
-							return
-						end
-						config.settings = config.settings or {}
-						config.settings.python = vim.tbl_deep_extend("force", config.settings.python or {}, {
-							pythonPath = py,
-							venvPath = venv_root,
-							venv = ".venv",
-						})
-					end
-				elseif server_name == "ruff" then
+				-- `ty` needs no venv wiring: it resolves the interpreter from the
+				-- project root the LSP client hands it, so it works from a uv
+				-- project even when nvim was opened somewhere else entirely.
+				if server_name == "ruff" then
 					local py = find_uv_python()
 					if py then
 						cfg.init_options = { settings = { interpreter = { py } } }
